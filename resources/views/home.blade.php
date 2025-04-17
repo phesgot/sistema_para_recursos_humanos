@@ -1,8 +1,8 @@
 <x-layout-app page-title="Home">
-    <h1 class="text-center">DENTRO DO APP</h1>
+    <h1 class="text-center my-5">DENTRO DO APP</h1>
 
-    @php
+    {{-- @php
         dump(auth()->user());
-    @endphp
+    @endphp --}}
 
 </x-layout-app>

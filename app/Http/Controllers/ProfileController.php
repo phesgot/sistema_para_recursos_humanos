@@ -36,4 +36,24 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Senha alterada com sucesso.');
     }
+
+    public function updateUserData(Request $request)
+    {
+         // form validation
+         $request->validate(
+            [
+                'name' => 'required|min:3|max:255',
+                'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
+                
+            ]
+        );
+
+        // update user data
+        $user = auth()->user();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+
+        return redirect()->back()->with('success_change_data', 'Dados alterados com sucesso.');
+    }
 }

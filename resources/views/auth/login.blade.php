@@ -27,8 +27,8 @@
                             <label for="password">Senha</label>
                             <input type="password" class="form-control" id="password" name="password">
                             @error('password')
-                            <div class="text-danger">{{ $message }}</div>
-                        @enderror
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
@@ -37,6 +37,12 @@
                         </div>
 
                     </form>
+
+                    @if (session('status'))
+                        <div class="alert alert-success mt-3 text-center">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                 </div>
 

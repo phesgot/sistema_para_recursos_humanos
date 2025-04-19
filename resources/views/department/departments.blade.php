@@ -27,12 +27,16 @@
                         <tr>
                             <td>{{ $department->name }}</td>
                             <td>
+                                @if ($department->id === 1)
                                 <div class="d-flex gap-3 justify-content-end">
-                                    <a href="#" class="btn btn-sm btn-outline-dark"><i
-                                            class="fa-regular fa-pen-to-square me-2"></i>Editar</a>
-                                    <a href="#" class="btn btn-sm btn-outline-dark"><i
-                                            class="fa-regular fa-trash-can me-2"></i>Deletar</a>
+                                    <i class="fa-solid fa-lock"></i>
                                 </div>
+                                @else
+                                <div class="d-flex gap-3 justify-content-end">
+                                    <a href="{{ route('department.edit-department', ['id' => $department->id]) }}" class="btn btn-sm btn-outline-dark"><i class="fa-regular fa-pen-to-square me-2"></i>Editar</a>
+                                    <a href="{{ route('department.delete-department', ['id' => $department->id]) }}" class="btn btn-sm btn-outline-dark"><i class="fa-regular fa-trash-can me-2"></i>Deletar</a>
+                                </div>  
+                                @endif
                             </td>
                         </tr>
                     @endforeach

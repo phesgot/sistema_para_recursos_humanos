@@ -28,7 +28,7 @@
                             @php
                                 $permissions = json_decode($colaborador->permissions);
                             @endphp
-                            <td>{{ implode($permissions, ',') }}</td>
+                            <td>{{ implode(',', $permissions) }}</td>
                             <td>
                                 <div class="d-flex gap-3 justify-content-end">
                                     <a href="#" class="btn btn-sm btn-outline-dark">

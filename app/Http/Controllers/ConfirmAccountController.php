@@ -20,7 +20,7 @@ class ConfirmAccountController extends Controller
         return view('auth.confirm-account', compact('user'));
     }
 
-    public function confirmAccountSubmit(Request $request)
+    public function confirmAccountSubmit(Request $request): View
     {
         // form validation
         $request->validate([
@@ -34,6 +34,6 @@ class ConfirmAccountController extends Controller
         $user->email_verified_at = now();
         $user->save();
 
-        return redirect()->route('login');
+        return view('auth.welcome')->with('user', $user);
     }
 }

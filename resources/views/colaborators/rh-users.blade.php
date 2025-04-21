@@ -5,12 +5,12 @@
         @if ($colaboradores->count() === 0)
             <div class="text-center my-5">
                 <p>Nenhum colaborador cadastrado.</p>
-                <a href="{{ route('colaborators.new-colaborator') }}" class="btn btn-primary">Cadastrar um novo
+                <a href="{{ route('colaborators.rh.new-colaborator') }}" class="btn btn-primary">Cadastrar um novo
                     colaborador</a>
             </div>
         @else
             <div class="mb-3">
-                <a href="{{ route('colaborators.new-colaborator') }}" class="btn btn-primary">Cadastrar um novo
+                <a href="{{ route('colaborators.rh.new-colaborator') }}" class="btn btn-primary">Cadastrar um novo
                     colaborador</a>
             </div>
             <table class="table" id="table">
@@ -39,10 +39,10 @@
                             <td>R$ {{ $colaborador->detail->salary }}</td>
                             <td>
                                 <div class="d-flex gap-3 justify-content-end">
-                                    <a href="{{ route('colaborators.edit-colaborator', ['id' => $colaborador->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
+                                    <a href="{{ route('colaborators.rh.edit-colaborator', ['id' => $colaborador->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
                                         <i class="fa-regular fa-pen-to-square me-2"></i>Editar
                                     </a>
-                                    <a href="{{ route('colaborators.delete', ['id' => $colaborador->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
+                                    <a href="{{ route('colaborators.rh.delete', ['id' => $colaborador->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
                                         <i class="fa-regular fa-trash-can me-2"></i>Deletar
                                     </a>
                                 </div>

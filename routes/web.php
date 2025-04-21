@@ -18,23 +18,19 @@ Route::middleware('auth')->group(function(){
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments');
     Route::get('/departments/new-department', [DepartmentController::class, 'newDepartment'])->name('department.new-department');
     Route::post('/departments/creat-department', [DepartmentController::class, 'creatDepartment'])->name('department.creat-department');
-
     Route::get('/departments/edit-department/{id}', [DepartmentController::class, 'editDepartment'])->name('department.edit-department');
     Route::post('/departments/update-department', [DepartmentController::class, 'updateDepartment'])->name('department.update-department');
-
     Route::get('/departments/delete-department/{id}', [DepartmentController::class, 'deleteDepartment'])->name('department.delete-department');
     Route::get('/departments/delete-department-confirm/{id}', [DepartmentController::class, 'deleteDepartmentConfirm'])->name('department.delete-department-confirm');
 
     // RH colaborador routes
     Route::get('/rh-users', [RhUserController::class, 'index'])->name('colaborators.rh-users');
-    Route::get('/rh-users/new-colaborator', [RhUserController::class, 'newColaborator'])->name('colaborators.new-colaborator');
-    Route::post('/rh-users/create-colaborator', [RhUserController::class, 'createRhColaborator'])->name('colaborators.create-colaborator');
-
-    Route::get('/rh-users/edit-colaborator/{id}', [RhUserController::class, 'editRhColaborator'])->name('colaborators.edit-colaborator');
-    Route::post('/rh-users/update-colaborator', [RhUserController::class, 'updateRhColaborator'])->name('colaborators.update-colaborator');
-
-    Route::get('/rh-users/delete-colaborator/{id}', [RhUserController::class, 'deleteRhColaborator'])->name('colaborators.delete');
-    Route::get('/rh-users/delete-colaborator-confirm/{id}', [RhUserController::class, 'deleteRhColaboratorConfirm'])->name('colaborators.delete-confirm');
+    Route::get('/rh-users/new-colaborator', [RhUserController::class, 'newColaborator'])->name('colaborators.rh.new-colaborator');
+    Route::post('/rh-users/create-colaborator', [RhUserController::class, 'createRhColaborator'])->name('colaborators.rh.create-colaborator');
+    Route::get('/rh-users/edit-colaborator/{id}', [RhUserController::class, 'editRhColaborator'])->name('colaborators.rh.edit-colaborator');
+    Route::post('/rh-users/update-colaborator', [RhUserController::class, 'updateRhColaborator'])->name('colaborators.rh.update-colaborator');
+    Route::get('/rh-users/delete-colaborator/{id}', [RhUserController::class, 'deleteRhColaborator'])->name('colaborators.rh.delete');
+    Route::get('/rh-users/delete-colaborator-confirm/{id}', [RhUserController::class, 'deleteRhColaboratorConfirm'])->name('colaborators.rh.delete-confirm');
 });
 
 

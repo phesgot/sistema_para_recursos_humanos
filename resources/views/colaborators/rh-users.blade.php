@@ -36,10 +36,10 @@
                             <td>{{ implode(',', $permissions) }}</td>
                             <td>{{ $colaborador->detail->admission_date }}</td>
                             <td>{{ $colaborador->detail->city }}</td>
-                            <td>{{ $colaborador->detail->salary }}</td>
+                            <td>R$ {{ $colaborador->detail->salary }}</td>
                             <td>
                                 <div class="d-flex gap-3 justify-content-end">
-                                    <a href="#" class="btn btn-sm btn-outline-dark ms-3">
+                                    <a href="{{ route('colaborators.edit-colaborator', ['id' => $colaborador->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
                                         <i class="fa-regular fa-pen-to-square me-2"></i>Editar
                                     </a>
                                     <a href="#" class="btn btn-sm btn-outline-dark ms-3">

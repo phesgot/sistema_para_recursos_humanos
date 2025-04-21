@@ -1,8 +1,8 @@
-<x-layout-app page-title="New RH User">
+<x-layout-app page-title="Novo colaborador do RH">
 
     <div class="w-100 p-4">
 
-        <h3>Novo colaborador dos Recursos Humano</h3>
+        <h3>Novo colaborador do Recursos Humano</h3>
 
         <hr>
 

@@ -23,7 +23,7 @@
 
             <div class="mb-3">
                 <a href="{{ route('departments') }}" class="btn btn-outline-danger me-3">Cancelar</a>
-                <button type="submit" class="btn btn-primary">Editar departamento</button>
+                <button type="submit" class="btn btn-primary">Atualizar departamento</button>
             </div>
 
         </form>

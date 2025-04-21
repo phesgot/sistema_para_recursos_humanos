@@ -13,7 +13,10 @@ class RhUserController extends Controller
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-        $colaboradores = User::where('role', 'rh')->get();
+        // $colaboradores = User::where('role', 'rh')->get();
+        $colaboradores = User::with('detail')
+                        ->where('role', 'rh')
+                        ->get();
 
 
         return view('colaborators.rh-users', compact('colaboradores'));

@@ -5,7 +5,7 @@
 
         <hr>
 
-        <p>Você tem certeza que deseja deletar este departamento?</p>
+        <p>Você tem certeza que deseja deletar este departamento ?</p>
 
         <div class="text-center">
             <h3 class="my-5">{{ $department->name }}</h3>

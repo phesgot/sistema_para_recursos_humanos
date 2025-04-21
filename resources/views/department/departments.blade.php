@@ -27,7 +27,7 @@
                         <tr>
                             <td>{{ $department->name }}</td>
                             <td>
-                                @if ($department->id === 1)
+                                @if (in_array($department->id, [1,2]))
                                 <div class="d-flex gap-3 justify-content-end">
                                     <i class="fa-solid fa-lock"></i>
                                 </div>

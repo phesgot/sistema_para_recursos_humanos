@@ -6,6 +6,7 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 class DepartmentController extends Controller
 {
@@ -50,8 +51,8 @@ class DepartmentController extends Controller
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-        // Check if id === 1
-        if(intval($id) === 1 ){
+       // Check if department  is blocked
+       if($this->isDepartmentBlocked($id)){
             return redirect()->route('departments');
         }
         $department = Department::findOrFail($id);
@@ -70,9 +71,8 @@ class DepartmentController extends Controller
             'name' => 'required|string|min:3|max:50|unique:departments,name,' . $id
         ]); 
 
-        // check if id === 1
-        // Check if id === 1
-        if(intval($id) === 1 ){
+       // Check if department  is blocked
+       if($this->isDepartmentBlocked($id)){
             return redirect()->route('departments');
         }
 
@@ -83,17 +83,14 @@ class DepartmentController extends Controller
         ]);
 
         return redirect()->route('departments');
-
-
-
     }
 
     public function deleteDepartment($id)
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-        // Check if id === 1
-        if(intval($id) === 1 ){
+        // Check if department is blocked
+        if($this->isDepartmentBlocked($id)){
             return redirect()->route('departments');
         }
 
@@ -107,8 +104,8 @@ class DepartmentController extends Controller
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-        // Check if id === 1
-        if(intval($id) === 1 ){
+       // Check if department is blocked
+       if($this->isDepartmentBlocked($id)){
             return redirect()->route('departments');
         }
 
@@ -118,5 +115,10 @@ class DepartmentController extends Controller
 
         return redirect()->route('departments');
 
+    }
+
+    private function isDepartmentBlocked($id): bool
+    {
+        return in_array(intval($id), [1,2]);
     }
 }

@@ -1,11 +1,18 @@
 <?php
 
+use App\Http\Controllers\ConfirmAccountController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RhUserController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function(){
+Route::middleware('guest')->group(function () {
+    // email confirmation and password definition
+    Route::get('/confirm-account/{token}', [ConfirmAccountController::class, 'confirmAccount'])->name('confirm-account');
+    Route::post('/confirm-account', [ConfirmAccountController::class, 'confirmAccountSubmit'])->name('confirm-account-submit');
+});
+
+Route::middleware('auth')->group(function () {
     Route::redirect('/', 'home');
     Route::view('/home', 'home')->name('home');
 
@@ -32,5 +39,3 @@ Route::middleware('auth')->group(function(){
     Route::get('/rh-users/delete-colaborator/{id}', [RhUserController::class, 'deleteRhColaborator'])->name('colaborators.rh.delete');
     Route::get('/rh-users/delete-colaborator-confirm/{id}', [RhUserController::class, 'deleteRhColaboratorConfirm'])->name('colaborators.rh.delete-confirm');
 });
-
-

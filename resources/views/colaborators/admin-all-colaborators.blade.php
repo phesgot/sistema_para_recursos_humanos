@@ -1,19 +1,16 @@
-<x-layout-app page-title='Recursos Humanos'>
+<x-layout-app page-title="Colaborators">
+
     <div class="w-100 p-4">
-        <h3>Recursos Humanos Colaboradores</h3>
+
+        <h3>Colaboradores</h3>
+
         <hr>
 
         @if ($colaborators->count() === 0)
             <div class="text-center my-5">
                 <p>Nenhum colaborador cadastrado.</p>
-                <a href="{{ route('colaborators.rh.new-colaborator') }}" class="btn btn-primary">Cadastrar um novo
-                    colaborador</a>
             </div>
         @else
-            <div class="mb-3">
-                <a href="{{ route('colaborators.rh.new-colaborator') }}" class="btn btn-primary">Cadastrar um novo
-                    colaborador</a>
-            </div>
             <table class="table" id="table">
                 <thead class="table-dark">
                     <th>Nome</th>
@@ -21,6 +18,7 @@
                     <th>Ativo</th>
                     <th>Departamento</th>
                     <th>Papel</th>
+                    <th>Permissões</th>
                     <th>Data de admissão</th>
                     <th>Salário</th>
                     <th></th>
@@ -39,16 +37,16 @@
                             </td>
                             <td>{{ $colaborator->department->name }}</td>
                             <td>{{ $colaborator->role }}</td>
+                            @php
+                                $permissions = json_decode($colaborator->permissions);
+                            @endphp
+                            <td>{{ implode(',', $permissions) }}</td>
                             <td>{{ $colaborator->detail->admission_date }}</td>
                             <td>R$ {{ $colaborator->detail->salary }}</td>
                             <td>
                                 <div class="d-flex gap-3 justify-content-end">
-                                    <a href="{{ route('colaborators.rh.edit-colaborator', ['id' => $colaborator->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
-                                        <i class="fa-regular fa-pen-to-square me-2"></i>Editar
-                                    </a>
-                                    <a href="{{ route('colaborators.rh.delete', ['id' => $colaborator->id]) }}" class="btn btn-sm btn-outline-dark ms-3">
-                                        <i class="fa-regular fa-trash-can me-2"></i>Deletar
-                                    </a>
+                                    <a href="{{ route('colaborators.details', ['id' => $colaborator->id]) }}" class="btn btn-sm btn-outline-dark ms-3"><i class="fas fa-eye me-2"></i>Detalhes</a>
+                                    <a href="#" class="btn btn-sm btn-outline-dark ms-3"><i class="fa-regular fa-trash-can me-2"></i>Deletar</a>
                                 </div>
                             </td>
                         </tr>
@@ -58,4 +56,6 @@
         @endif
 
     </div>
+
+
 </x-layout-app>

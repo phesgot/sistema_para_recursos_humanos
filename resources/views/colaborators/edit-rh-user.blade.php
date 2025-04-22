@@ -11,13 +11,13 @@
             @csrf
 
             <div class="d-flex gap-5">
-                <p>Nome do colaborador: <strong>{{ $colaborador->name }}</strong></p>
-                <p>Email do colaborador: <strong>{{ $colaborador->email }}</strong></p>
+                <p>Nome do colaborador: <strong>{{ $colaborator->name }}</strong></p>
+                <p>Email do colaborador: <strong>{{ $colaborator->email }}</strong></p>
             </div>
 
             <hr>
 
-            <input type="hidden" name="user_id" value="{{ $colaborador->id }}">
+            <input type="hidden" name="user_id" value="{{ $colaborator->id }}">
 
             <div class="container-fluid">
                 <div class="row gap-3">
@@ -29,7 +29,7 @@
                             <div class="mb-3">
                                 <label for="salary" class="form-label">Salário</label>
                                 <input type="number" class="form-control" id="salary" name="salary" step=".01"
-                                    placeholder="0,00" value="{{ old('salary', $colaborador->detail->salary) }}">
+                                    placeholder="0,00" value="{{ old('salary', $colaborator->detail->salary) }}">
                                 @error('salary')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -40,7 +40,7 @@
                                 <label for="admission_date" class="form-label">Data de admissão</label>
                                 <input type="text" class="form-control" id="admission_date" name="admission_date"
                                     placeholder="YYYY-mm-dd"
-                                    value="{{ old('admission_date', $colaborador->detail->admission_date) }}">
+                                    value="{{ old('admission_date', $colaborator->detail->admission_date) }}">
                                 @error('admission_date')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

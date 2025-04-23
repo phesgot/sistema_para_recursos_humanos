@@ -17,8 +17,8 @@ class RhUserController extends Controller
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-        // $colaboradores = User::where('role', 'rh')->get();
-        $colaborators = User::with('detail')
+        $colaborators = User::withTrashed()
+            ->with('detail')
             ->where('role', 'rh')
             ->get();
 
@@ -126,7 +126,6 @@ class RhUserController extends Controller
         $colaborator = User::findOrFail($id);
 
         return view('colaborators.delete-rh-user', compact('colaborator'));
-
     }
 
     public function deleteRhColaboratorConfirm($id)
@@ -138,5 +137,15 @@ class RhUserController extends Controller
         $colaborator->delete();
 
         return redirect()->route('colaborators.rh-users')->with('success', 'Colaborador deletado com sucesso');
+    }
+
+    public function restoreRhColaboratorConfirm($id)
+    {
+        Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
+
+        $colaborator = User::withTrashed()->where('role', 'rh')->findOrFail($id);
+        $colaborator->restore();
+
+        return redirect()->route('colaborators.rh-users')->with('success', 'Colaborador restaurado com sucesso');
     }
 }

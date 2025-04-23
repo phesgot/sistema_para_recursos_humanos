@@ -13,7 +13,8 @@ class ColaboratorsController extends Controller
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-        $colaborators = User::with('detail', 'department')
+        $colaborators = User::withTrashed()
+            ->with('detail', 'department')
             ->where('role', '<>', 'admin')
             ->get();
 
@@ -25,14 +26,19 @@ class ColaboratorsController extends Controller
         Auth::user()->can('admin', 'rh') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
         // check if is the same as the auth user
-        if(Auth::user()->id === $id){
+        if (Auth::user()->id === $id) {
             return redirect()->route('home');
         }
 
         $colaborator = User::with('detail', 'department')
             ->where('id', $id)
             ->first();
-        
+
+        // check if colaborator exists
+        if (!$colaborator) {
+            abort(404);
+        }
+
         return view('colaborators.show-details')->with('colaborator', $colaborator);
     }
 
@@ -41,7 +47,7 @@ class ColaboratorsController extends Controller
         Auth::user()->can('admin', 'rh') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
         // check if is the same as the auth user
-        if(Auth::user()->id === $id){
+        if (Auth::user()->id === $id) {
             return redirect()->route('home');
         }
 
@@ -55,7 +61,7 @@ class ColaboratorsController extends Controller
         Auth::user()->can('admin', 'rh') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
         // check if is the same as the auth user
-        if(Auth::user()->id === $id){
+        if (Auth::user()->id === $id) {
             return redirect()->route('home');
         }
 
@@ -64,5 +70,15 @@ class ColaboratorsController extends Controller
         $colaborator->delete();
 
         return redirect()->route('colaborators.all-colaborators')->with('success', 'Colaborador deletado com sucesso');
+    }
+
+    public function restoreColaboratorConfirm($id)
+    {
+        Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
+
+        $colaborator = User::withTrashed()->findOrFail($id);
+        $colaborator->restore();
+
+        return redirect()->route('colaborators.all-colaborators')->with('success', 'Colaborador restaurado com sucesso');
     }
 }

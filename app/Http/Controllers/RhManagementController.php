@@ -127,5 +127,14 @@ class RhManagementController extends Controller
 
         return redirect()->route('rh.management.home')->with('success', 'Colaborador atualizado com sucesso');
     }
+
+    public function showDetails($id): View
+    {
+        Auth::user()->can('rh') ?: abort(403, 'Você não tem autorização para acessar esta página');
+
+        $colaborator = User::with('detail', 'department')->findOrFail($id);
+
+        return view('colaborators.show-details', compact('colaborator'));
+    }
 }
 

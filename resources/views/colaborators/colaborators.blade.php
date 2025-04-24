@@ -43,7 +43,7 @@
                                     <span class="badge bg-success">Sim</span>
                                 @endempty
                             </td>
-                            <td>{{ $colaborator->department->name }}</td>
+                            <td>{{ $colaborator->department->name  ?? "-" }}</td>
                             <td>{{ $colaborator->role }}</td>
                             @php
                                 $permissions = json_decode($colaborator->permissions);

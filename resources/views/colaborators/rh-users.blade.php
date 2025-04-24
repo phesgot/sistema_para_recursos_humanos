@@ -37,7 +37,7 @@
                                     <span class="badge bg-success">Sim</span>
                                 @endempty
                             </td>
-                            <td>{{ $colaborator->department->name }}</td>
+                            <td>{{ $colaborator->department->name  ?? "-" }}</td>
                             <td>{{ $colaborator->role }}</td>
                             <td>{{ $colaborator->detail->admission_date }}</td>
                             <td>R$ {{ $colaborator->detail->salary }}</td>

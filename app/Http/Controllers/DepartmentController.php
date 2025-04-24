@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -47,12 +48,12 @@ class DepartmentController extends Controller
         return redirect()->route('departments');
     }
 
-    public function editDepartment($id) 
+    public function editDepartment($id)
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-       // Check if department  is blocked
-       if($this->isDepartmentBlocked($id)){
+        // Check if department  is blocked
+        if ($this->isDepartmentBlocked($id)) {
             return redirect()->route('departments');
         }
         $department = Department::findOrFail($id);
@@ -69,10 +70,10 @@ class DepartmentController extends Controller
         $request->validate([
             'id' => 'required',
             'name' => 'required|string|min:3|max:50|unique:departments,name,' . $id
-        ]); 
+        ]);
 
-       // Check if department  is blocked
-       if($this->isDepartmentBlocked($id)){
+        // Check if department  is blocked
+        if ($this->isDepartmentBlocked($id)) {
             return redirect()->route('departments');
         }
 
@@ -90,7 +91,7 @@ class DepartmentController extends Controller
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
         // Check if department is blocked
-        if($this->isDepartmentBlocked($id)){
+        if ($this->isDepartmentBlocked($id)) {
             return redirect()->route('departments');
         }
 
@@ -104,8 +105,8 @@ class DepartmentController extends Controller
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
-       // Check if department is blocked
-       if($this->isDepartmentBlocked($id)){
+        // Check if department is blocked
+        if ($this->isDepartmentBlocked($id)) {
             return redirect()->route('departments');
         }
 
@@ -113,12 +114,19 @@ class DepartmentController extends Controller
 
         $department->delete();
 
-        return redirect()->route('departments');
+        // update all colaborators department to null
+        User::where('department_id', $id)
+            ->update(
+                [
+                    'department_id' => null
+                ]
+            );
 
+        return redirect()->route('departments');
     }
 
     private function isDepartmentBlocked($id): bool
     {
-        return in_array(intval($id), [1,2]);
+        return in_array(intval($id), [1, 2]);
     }
 }

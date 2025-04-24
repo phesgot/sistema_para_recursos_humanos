@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
         } elseif(auth()->user()->role === 'rh'){
             return redirect()->route('rh.management.home');
         } else{
-            die('vai para a página inicial do colaborador normal');
+            return redirect()->route('colaborator');
         }
     })->name('home');
 
@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/profile', [ProfileController::class, 'index'])->name('user.profile');
     Route::post('/user/profile/update-password', [ProfileController::class, 'updatePassword'])->name('user.profile.update-password');
     Route::post('/user/profile/update-user-data', [ProfileController::class, 'updateUserData'])->name('user.profile.update-user-data');
+    Route::post('/user/profile/update-user-address', [ProfileController::class, 'updateUserAddress'])->name('user.profile.update-user-address');
 
     // Department route
     Route::get('/departments', [DepartmentController::class, 'index'])->name('departments');
@@ -68,8 +69,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/colaborators/details/{id}', [ColaboratorsController::class, 'showDetails'])->name('colaborators.details');
     Route::get('/colaborators/delete/{id}', [ColaboratorsController::class, 'deleteColaborator'])->name('colaborators.delete');
     Route::get('/colaborators/delete-confirm/{id}', [ColaboratorsController::class, 'deleteColaboratorConfirm'])->name('colaborators.delete-confirm');
-    Route::get('/colaborators/restore/{id}', [ColaboratorsController::class, 'restoreColaboratorConfirm'])->name('colaborators.restore');
+    Route::get('/colaborators/restore/{id}', [ColaboratorsController::class, 'restoreColaborator'])->name('colaborators.restore');
 
     // admin routes
     Route::get('/admin/home', [AdminController::class, 'home'])->name('admin.home');
+
+    // colaborator route
+    Route::get('/colaborator', [ColaboratorsController::class, 'home'])->name('colaborator');
 });

@@ -72,7 +72,7 @@ class ColaboratorsController extends Controller
         return redirect()->route('colaborators.all-colaborators')->with('success', 'Colaborador deletado com sucesso');
     }
 
-    public function restoreColaboratorConfirm($id)
+    public function restoreColaborator($id)
     {
         Auth::user()->can('admin') ?: abort(403, 'Você não tem permissão para acessar esta página.');
 
@@ -80,5 +80,17 @@ class ColaboratorsController extends Controller
         $colaborator->restore();
 
         return redirect()->route('colaborators.all-colaborators')->with('success', 'Colaborador restaurado com sucesso');
+    }
+
+    public function home(): View
+    {
+        Auth::user()->can('colaborator') ?: abort(403, 'Você não tem permissão para acessar esta página.');
+
+        // get colaborator data
+        $colaborator = User::with('detail', 'department')
+                        ->where('id', Auth::user()->id)
+                        ->first();
+
+        return view('colaborators.show-details', compact('colaborator'));
     }
 }

@@ -26,7 +26,7 @@ Este projeto é uma aplicação web desenvolvida em Laravel que implementa um si
 ## 📦 Instalação e Execução  
 ```bash
 # Clone o repositório
-https://github.com/phesgot/
+https://github.com/phesgot/sistema_para_recursos_humanos.git
 
 # Entre na pasta do projeto
 

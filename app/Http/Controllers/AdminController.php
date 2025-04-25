@@ -28,6 +28,7 @@ class AdminController extends Controller
                 return $colaborator->detail->salary;
             });
 
+            // format total salary
             $data['total_salary'] = 'R$ ' . number_format($data['total_salary'], 2, ',', '.');
 
         // total colaborators by department
@@ -54,6 +55,14 @@ class AdminController extends Controller
                         return $colaborator->detail->salary;
                     })
                 ];
+            });
+
+            // format total salary by department
+            $data['total_salary_by_department'] = $data['total_salary_by_department']->map(function($department){
+                return [
+                    'department' => $department['department'],
+                    'total' => 'R$ ' . number_format($department['total'], 2, ',', '.')
+                ]; 
             });
 
         // display admin home page

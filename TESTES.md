@@ -11,7 +11,7 @@
 [✔️] Testar a inserção de um novo user RH com perfil de admin
 [✔️] Testar a inserção de um novo colaborador com o perfil de colaborador
 
-[❌] Testar se um admin, após login com sucesso, consegue ver a página de colaboradores rh
+[✔️] Testar se um admin, após login com sucesso, consegue ver a página de colaboradores rh
 [❌] Testar se, sem usuário logado, é possível aceder à página home
 [❌] Testar se, sem usuário logado, é possível aceder à página login
 [❌] Testar se, estando logado, é possível aceder à página de recuperação de senha

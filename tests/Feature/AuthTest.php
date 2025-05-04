@@ -26,17 +26,7 @@ it('Display the recover password page correctly', function () {
 it('Test if an admin user can login with siccess', function () {
 
     // criar um admin
-    User::insert([
-        'department_id' => 1,
-        'name' => 'Administrador',
-        'email' => 'admin@rhmangnt.com',
-        'email_verified_at' => now(),
-        'password' => bcrypt('Aa123456'),
-        'role' => 'admin',
-        'permissions' => '["admin"]',
-        'created_at' => now(),
-        'updated_at' => now(),
-    ]);
+    addAdmimUser();
 
     // login com admin criado
     $result = $this->post('/login', [
@@ -48,3 +38,57 @@ it('Test if an admin user can login with siccess', function () {
     expect($result->status())->toBe(302);
     expect($result->assertRedirect('/home'));
 });
+
+it('Test if an rh user can login with siccess', function () {
+
+    // criar o usuário rh
+    addRhUser();
+
+    // login com o rh
+    $result = $this->post('/login', [
+        "email" => 'rh1@rhmangnt.com',
+        "password" => 'Aa123456',
+    ]);
+
+    // verifica se o user rh fez o login com sucesso
+    expect($result->status())->toBe(302);
+    expect($result->assertRedirect('/home'));
+
+    // verifica se o user rh consegue acesso a página exclusiva 
+    expect($this->get('/rh-users/management/home')->status())->toBe(200);
+});
+
+
+function addAdmimUser()
+{
+
+    // Create admin user
+    User::insert([
+        'department_id' => 1,
+        'name' => 'Administrador',
+        'email' => 'admin@rhmangnt.com',
+        'email_verified_at' => now(),
+        'password' => bcrypt('Aa123456'),
+        'role' => 'admin',
+        'permissions' => '["admin"]',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+}
+
+function addRhUser()
+{
+
+    // Create rh user
+    User::insert([
+        'department_id' => 2,
+        'name' => 'Colaborador RH',
+        'email' => 'rh1@rhmangnt.com',
+        'email_verified_at' => now(),
+        'password' => bcrypt('Aa123456'),
+        'role' => 'rh',
+        'permissions' => '["rh"]',
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
+}

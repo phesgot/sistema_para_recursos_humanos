@@ -5,7 +5,7 @@
 [✔️] Testar a rota inicial como sendo a página de login
 [✔️] Testar a rota de recuperação de senha
 [✔️] Testar processo de login com sucesso para o perfil de admin 
-[❌] Testar processo de login com sucesso para o perfil de RH 
+[✔️] Testar processo de login com sucesso para o perfil de RH 
 [❌] Testar processo de login com sucesso para o perfil de colaborador 
 
 [❌] Testar a inserção de um novo user RH com perfil de admin

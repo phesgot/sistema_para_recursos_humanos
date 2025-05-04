@@ -16,3 +16,8 @@ it('display the login page when not logged in', function(){
     expect($this->get('/login')->content())->toContain("Esqueceu a sua senha?");
 
 });
+
+it('Display the recover password page correctly', function(){
+    expect($this->get('/forgot-password')->status())->toBe(200);
+    expect($this->get('/forgot-password')->content())->toContain("Já sei a minha senha?");
+});
